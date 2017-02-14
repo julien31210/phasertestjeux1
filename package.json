@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/julien31210/phasertestjeux1/issues"
   },
-  "homepage": "https://github.com/julien31210/phasertestjeux1#readme"
+  "homepage": "https://github.com/julien31210/phasertestjeux1#readme",
+  "dependencies": {
+    "phaser": "^2.6.2"
+  }
 }
