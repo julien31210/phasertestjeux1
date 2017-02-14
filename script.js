@@ -93,7 +93,7 @@ $(document).ready(function(){
 		scoreText = game.add.text(16, 16, "score: 0", { fontsize: "32px", fill:"#000"});
 	}
 	function moveBullets (bullet) { 
-		accelerateToObject(bullet,player,1000);
+		accelerateToObject(bullet,player,500);
 	}
 
 	function accelerateToObject(obj1, obj2, speed) {
@@ -109,16 +109,18 @@ $(document).ready(function(){
 		bullets.forEachAlive(moveBullets,this); 
 
 		j++
-		if(j%150===0){
+		if(j%100===0){
 			var bullet = bullets.create(game.rnd.integerInRange(500, 780), game.rnd.integerInRange(0, 200), 'poulpeman');
-			bullet.scale.setTo(0.1, 0.1)
+			bullet.scale.setTo(0.1, 0.1);
 			game.physics.p2.enable(bullet,false);
+			game.physics.arcade.enable(bullet)
 		}
 
 		game.physics.arcade.collide(player, platforms);
 			// game.physics.arcade.collide(player, stars);
 			game.physics.arcade.collide(stars, platforms);
 			game.physics.arcade.overlap(player, stars, collectStar, null, this);
+			game.physics.arcade.overlap(bullets, bullets, bulletHit, null, this);
 
 			player.body.velocity.x = 0;
 
@@ -160,8 +162,12 @@ $(document).ready(function(){
 				scoreText.text = "Score: " + score;
 			}
 
-			function pertevie(){
-				vieperso--
+			function bulletHit(player, bullet){
+				bullet.kill();
+				pertevie(2);
+			}
+			function pertevie(x){
+				vieperso-=x;
 				if(vieperso === 0){
 					player.kill();
 					// affichage perdu
@@ -177,16 +183,16 @@ $(document).ready(function(){
 			}
 
 			i++
-			// if(i%100===0){
+			if(i%100===0){
 
-			// 	var puiss = Math.floor(1+(Math.random()*4));
-			// 	var pos = Math.floor(1+(Math.random()*11));
-			// 	var star = stars.create(pos*70, 0, "boost"+puiss);
+				var puiss = Math.floor(1+(Math.random()*3));
+				var pos = Math.floor(1+(Math.random()*11));
+				var star = stars.create(pos*70, 0, "shell"+puiss);
 
-			// 	star.body.gravity.y = 300;
+				star.body.gravity.y = 300;
 
-			// 	star.body.bounce.y = 0,7 + Math.random()*0.2;
-			// }
+				star.body.bounce.y = 0,7 + Math.random()*0.2;
+			}
 
 		}
 
