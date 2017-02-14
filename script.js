@@ -6,8 +6,11 @@ $(document).ready(function(){
 	var platforms;
 	var player;
 	var cursors;
-
+	var i=0;
+	var score=0;
+	var scoreText;
 	var stars;
+	var poulpeman;
 
 	var GameState = {
 		preload: function(){
@@ -44,7 +47,7 @@ $(document).ready(function(){
 
 			ledge.body.immovable = true;
 
-			game.add.sprite(0, 0, "poulpeman");
+			game.add.sprite(550, 0, "poulpeman");
 
 			player = game.add.sprite(32, game.world.height - 150, 'dude');
 
@@ -74,6 +77,8 @@ $(document).ready(function(){
 			}
 
 			cursors = game.input.keyboard.createCursorKeys();
+
+			scoreText = game.add.text(16, 16, "score: 0", { fontsize: "32px", fill:"#000"});
 		},
 		update: function(){
 
@@ -85,12 +90,12 @@ $(document).ready(function(){
 			player.body.velocity.x = 0;
 
 			if(cursors.left.isDown){
-				player.body.velocity.x = -1500;
+				player.body.velocity.x = -1000;
 
 				player.animations.play('left')
 			}
 			else if(cursors.right.isDown){
-				player.body.velocity.x = 1500;
+				player.body.velocity.x = 1000;
 
 				player.animations.play('right')
 			}
@@ -100,16 +105,24 @@ $(document).ready(function(){
 			}
 
 			if(cursors.up.isDown ){
-				player.body.velocity.y = -3500;
+				player.body.velocity.y = -1500;
 
 			}
 			if(cursors.down.isDown ){
-				player.body.velocity.y = 3500;
+				player.body.velocity.y = 1500;
 
 			}
 			function collectStar(player, star){
 				star.kill();
+				score+=10;
+				scoreText.text = "Score: " + score;
 			}
+
+
+			// i++
+			// if(i%60===0){
+			// 	poulpeman(move.right)
+			// }
 
 		}
 
