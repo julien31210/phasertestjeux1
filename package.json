@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/julien31210/phasertestjeux1#readme",
   "dependencies": {
+    "animatesprite": "^0.2.1",
     "phaser": "^2.6.2"
   }
 }
